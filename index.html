@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一頁式網站需求調查</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        /* 自定義捲軸樣式 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .line-green { background-color: #06C755; }
+        .line-green:hover { background-color: #05b34c; }
+        
+        /* 隱藏預設的 radio 圓圈，我們用 Tailwind 自訂樣式 */
+        input[type="radio"] {
+            accent-color: #4f46e5; /* indigo-600 */
+        }
+        
+        /* 讓載入動畫置中 */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased relative">
+
+<!-- 前台：問卷填寫區 -->
+<div id="frontend-view" class="min-h-screen flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 transition-opacity duration-300">
+    <div class="max-w-3xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        
+        <div class="bg-indigo-600 px-6 py-8 sm:p-10 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiLz48L3N2Zz4=')]"></div>
+            <h1 class="text-3xl font-bold text-white mb-2 relative z-10">你好 👋</h1>
+            <p class="text-indigo-100 text-lg relative z-10">
+                做一頁式網站很簡單，請填寫以下資訊，讓我快速了解你的需求！
+            </p>
+        </div>
+
+        <form id="surveyForm" class="px-6 py-8 sm:p-10 space-y-10">
+            <!-- 問題 1 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">① 你想做什麼網站？ <span class="text-red-500">*</span></h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="店家介紹" class="w-4 h-4 mr-3" required>
+                        <span class="font-medium text-gray-700">A. 店家介紹</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="個人工作室" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">B. 個人工作室</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="商品／服務介紹" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">C. 商品／服務介紹</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="活動／優惠頁" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">D. 活動／優惠頁</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="個人品牌／作品集" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">E. 個人品牌／作品集</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q1" value="其他" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700 whitespace-nowrap mr-2">F. 其他：</span>
+                        <input type="text" name="q1_other" class="border-b border-gray-300 focus:border-indigo-500 outline-none flex-grow bg-transparent text-sm pb-1" placeholder="請填寫">
+                    </label>
+                </div>
+            </div>
+
+            <!-- 問題 2 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">② 網站主要想讓客人做什麼？ <span class="text-red-500">*</span></h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="看介紹" class="w-4 h-4 mr-3" required>
+                        <span class="font-medium text-gray-700">A. 看介紹</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="加 LINE" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">B. 加 LINE</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="打電話" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">C. 打電話</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="預約／下單" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">D. 預約／下單</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="導流到其他平台" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">E. 導流到其他平台</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q2" value="其他" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700 whitespace-nowrap mr-2">F. 其他：</span>
+                        <input type="text" name="q2_other" class="border-b border-gray-300 focus:border-indigo-500 outline-none flex-grow bg-transparent text-sm pb-1" placeholder="請填寫">
+                    </label>
+                </div>
+            </div>
+
+            <!-- 問題 3 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">③ 你有現成素材嗎？ <span class="text-red-500">*</span></h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q3" value="文案＋圖片都有" class="w-4 h-4 mr-3" required>
+                        <span class="font-medium text-gray-700">A. 文案＋圖片都有</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q3" value="有圖片，文字需要整理" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">B. 有圖片，文字需要整理</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q3" value="有文字，圖片需要整理" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">C. 有文字，圖片需要整理</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q3" value="都沒有，需要討論" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">D. 都沒有，需要討論</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 問題 4 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">④ 想要什麼風格？ <span class="text-red-500">*</span></h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="簡約" class="w-4 h-4 mr-3" required>
+                        <span class="font-medium text-gray-700">A. 簡約</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="高級" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">B. 高級</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="可愛" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">C. 可愛</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="商業／專業" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">D. 商業／專業</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="活潑" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">E. 活潑</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q4" value="沒想法" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">F. 沒想法</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 問題 5 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">⑤ 有沒有參考網站？</h3>
+                <p class="text-gray-500 text-sm mb-4">有的話直接丟網址給我，1～3個都可以。</p>
+                <textarea name="q5" rows="2" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="貼上參考網址..."></textarea>
+            </div>
+
+            <!-- 問題 6 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-2">⑥ 網站需要哪些內容？</h3>
+                <p class="text-gray-500 text-sm mb-4">例如：店家介紹／服務項目／價格／優惠／作品照片／地址／地圖／LINE／電話／預約按鈕……<br>直接列給我即可。</p>
+                <textarea name="q6" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="請列出您需要的內容清單..."></textarea>
+            </div>
+
+            <!-- 問題 7 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">⑦ 網域有嗎？ <span class="text-red-500">*</span></h3>
+                <div class="space-y-3">
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q7" value="已經有" class="w-4 h-4 mr-3" required>
+                        <span class="font-medium text-gray-700">A. 已經有</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q7" value="沒有，需要代辦" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">B. 沒有，需要代辦</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-white border rounded-lg cursor-pointer transition has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-500 has-[:checked]:ring-1 has-[:checked]:ring-indigo-500 hover:border-indigo-300">
+                        <input type="radio" name="q7" value="不知道網域是什麼" class="w-4 h-4 mr-3">
+                        <span class="font-medium text-gray-700">C. 不知道網域是什麼 😂</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 問題 8 -->
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 shadow-sm">
+                <h3 class="text-xl font-bold text-indigo-900 mb-2">⑧ 最後告訴我你希望的完成方向</h3>
+                <p class="text-indigo-700 text-sm mb-4 italic">例如：「我想做一個美容工作室網站，簡單漂亮，可以讓客人直接加 LINE 預約。」</p>
+                <textarea name="q8" rows="3" class="w-full p-3 border border-indigo-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="請用白話文描述您的期望..."></textarea>
+            </div>
+
+            <!-- 結語說明 & 送出按鈕 -->
+            <div class="text-center space-y-4 pt-6 border-t border-gray-200">
+                <p class="text-gray-800 font-bold text-xl">你負責告訴我<span class="text-indigo-600">「想做什麼」</span>，技術交給我。</p>
+                <button type="submit" id="submitBtn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg py-4 px-12 rounded-full shadow-lg transform hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2 mx-auto">
+                    <span>送出需求，取得方案報價</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- 頁尾 -->
+    <div class="mt-8 text-center text-gray-400 text-sm pb-8">
+        &copy; 2024 網頁設計需求溝通
+    </div>
+</div>
+
+<!-- 後台：管理者檢視區 (預設隱藏) -->
+<div id="admin-view" class="hidden min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm">
+            <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <i class="fa-solid fa-database text-indigo-600"></i> 後台：客戶需求單列表
+            </h2>
+            <button id="exitAdminBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition text-sm font-medium">
+                <i class="fa-solid fa-sign-out-alt"></i> 離開後台
+            </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">時間</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">類型 / 目的</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">素材 / 風格</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">網域</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">內容 / 期望</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- 資料會動態注入這裡 -->
+                        <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">載入中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 管理者登入密碼 Modal -->
+<div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
+    <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform transition-transform scale-95">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">進入後台管理</h3>
+        <p class="text-gray-500 text-sm mb-4">請輸入管理員密碼（預設：0000）</p>
+        <input type="password" id="adminPassword" class="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="輸入密碼">
+        <div class="flex gap-3 justify-end">
+            <button id="closeAdminModal" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg">取消</button>
+            <button id="loginAdminBtn" class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg">確認</button>
+        </div>
+    </div>
+</div>
+
+<!-- 提交成功 Modal & LINE 導流 -->
+<div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl text-center relative mx-4">
+        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+            <i class="fa-solid fa-check text-2xl text-green-600"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">需求已成功送出！</h3>
+        <p class="text-gray-600 mb-6">我已經收到您的資料。<br>請點擊下方按鈕加入 LINE，傳個貼圖給我，我會立即為您規劃方案！</p>
+        
+        <a href="https://line.me/R/ti/p/@290wuozx" target="_blank" rel="noopener noreferrer" 
+           class="line-green text-white font-bold text-lg py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-3 w-full mb-4">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+                <path d="M23.957 10.457c0-4.526-4.52-8.324-10.28-8.324-5.753 0-10.276 3.798-10.276 8.324 0 4.07 3.639 7.546 8.441 8.232.33.072.784.22 1.05.518.241.268.23.637.218.846-.007.13-.105.656-.126.793-.035.228-.158.775.682.421.839-.355 4.527-2.664 6.182-4.568 1.135-1.306 1.708-2.73 1.708-4.242h3.4z M7.733 13.064H5.437c-.36 0-.651-.291-.651-.65V7.818c0-.359.291-.651.651-.651s.651.292.651.651v3.945h1.645c.36 0 .651.292.651.651s-.292.65-.651.65z m3.136-.65c0 .359-.292.65-.651.65s-.651-.291-.651-.65V7.818c0-.359.291-.651.651-.651s.651.292.651.651v4.596z m4.512 0h-2.296c-.36 0-.651-.291-.651-.65V7.818c0-.359.292-.651.651-.651s.651.292.651.651v3.945h1.645c.36 0 .651.292.651.651s-.291.65-.651.65z m4.513 0c-.015.013-.028.026-.044.037-.089.06-.195.093-.306.093s-.217-.033-.306-.093c-.016-.011-.029-.024-.044-.037L16.92 10.37v2.044c0 .359-.292.65-.651.65s-.651-.291-.651-.65V7.818c0-.359.292-.651.651-.651.107 0 .21.031.298.086.02.012.039.026.057.042l2.274 2.693V7.818c0-.359.291-.651.651-.651s.651.292.651.651v4.596z"></path>
+            </svg>
+            一鍵加 LINE 聯絡
+        </a>
+        <p class="text-sm text-gray-500">LINE ID: <span class="font-bold">@290wuozx</span></p>
+        
+        <button id="closeSuccessModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+            <i class="fa-solid fa-times text-xl"></i>
+        </button>
+    </div>
+</div>
+
+<!-- 右下角隱藏的管理員按鈕 -->
+<button id="openAdminBtn" class="fixed bottom-4 right-4 bg-gray-200 text-gray-500 hover:bg-indigo-100 hover:text-indigo-600 p-3 rounded-full shadow transition opacity-50 hover:opacity-100 z-40" title="管理員登入">
+    <i class="fa-solid fa-lock"></i>
+</button>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // 初始化 Firebase
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-survey-app';
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    let isAuthReady = false;
+
+    // 進行身分驗證 (Firebase 要求必須驗證才能讀寫)
+    async function setupAuth() {
+        try {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+            isAuthReady = true;
+            console.log("Firebase Auth OK");
+        } catch (error) {
+            console.error("Auth error:", error);
+        }
+    }
+    setupAuth();
+
+    // DOM 元素
+    const form = document.getElementById('surveyForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successModal = document.getElementById('successModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    
+    // Admin 元素
+    const openAdminBtn = document.getElementById('openAdminBtn');
+    const adminModal = document.getElementById('adminModal');
+    const closeAdminModal = document.getElementById('closeAdminModal');
+    const loginAdminBtn = document.getElementById('loginAdminBtn');
+    const adminPasswordInput = document.getElementById('adminPassword');
+    const frontendView = document.getElementById('frontend-view');
+    const adminView = document.getElementById('admin-view');
+    const exitAdminBtn = document.getElementById('exitAdminBtn');
+    const adminTableBody = document.getElementById('admin-table-body');
+
+    // 處理表單送出
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (!isAuthReady) {
+            alert("系統正在初始化，請稍後幾秒再按送出。");
+            return;
+        }
+
+        // 改變按鈕狀態為載入中
+        const originalBtnContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="loader mr-2"></div> 處理中...';
+        submitBtn.disabled = true;
+
+        try {
+            // 整理表單資料
+            const formData = new FormData(form);
+            
+            // 處理「其他」選項的文字輸入
+            const q1Value = formData.get('q1') === '其他' ? `其他: ${formData.get('q1_other') || '未填寫'}` : formData.get('q1');
+            const q2Value = formData.get('q2') === '其他' ? `其他: ${formData.get('q2_other') || '未填寫'}` : formData.get('q2');
+
+            const submissionData = {
+                q1_type: q1Value,
+                q2_purpose: q2Value,
+                q3_assets: formData.get('q3'),
+                q4_style: formData.get('q4'),
+                q5_reference: formData.get('q5') || '無',
+                q6_content: formData.get('q6') || '無',
+                q7_domain: formData.get('q7'),
+                q8_expectation: formData.get('q8') || '無',
+                timestamp: serverTimestamp()
+            };
+
+            // 儲存到 Firebase Firestore
+            // 嚴格遵守路徑規範: artifacts/{appId}/public/data/{collectionName}
+            const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'survey_responses');
+            await addDoc(submissionsRef, submissionData);
+
+            // 送出成功，顯示 Modal
+            successModal.classList.remove('hidden');
+            form.reset();
+            
+        } catch (error) {
+            console.error("提交失敗: ", error);
+            alert("抱歉，發生錯誤，請稍後再試！");
+        } finally {
+            // 恢復按鈕狀態
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = false;
+        }
+    });
+
+    closeSuccessModal.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+
+    // 後台管理邏輯
+    let unsubscribeAdmin = null;
+
+    openAdminBtn.addEventListener('click', () => {
+        adminModal.classList.remove('hidden');
+        adminPasswordInput.value = '';
+        adminPasswordInput.focus();
+    });
+
+    closeAdminModal.addEventListener('click', () => {
+        adminModal.classList.add('hidden');
+    });
+
+    loginAdminBtn.addEventListener('click', () => {
+        if (adminPasswordInput.value === '0000') {
+            adminModal.classList.add('hidden');
+            frontendView.classList.add('hidden');
+            adminView.classList.remove('hidden');
+            openAdminBtn.classList.add('hidden');
+            loadAdminData();
+        } else {
+            // 自製錯誤提示，避免用原生 alert
+            const prevClass = adminPasswordInput.className;
+            adminPasswordInput.className += ' border-red-500 ring-2 ring-red-500';
+            setTimeout(() => { adminPasswordInput.className = prevClass; }, 1000);
+            adminPasswordInput.value = '';
+        }
+    });
+
+    exitAdminBtn.addEventListener('click', () => {
+        adminView.classList.add('hidden');
+        frontendView.classList.remove('hidden');
+        openAdminBtn.classList.remove('hidden');
+        if (unsubscribeAdmin) {
+            unsubscribeAdmin(); // 停止監聽資料
+        }
+    });
+
+    // 載入後台資料
+    function loadAdminData() {
+        const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'survey_responses');
+        const q = query(submissionsRef);
+        
+        unsubscribeAdmin = onSnapshot(q, (snapshot) => {
+            const docs = [];
+            snapshot.forEach(doc => {
+                docs.push({ id: doc.id, ...doc.data() });
+            });
+
+            // 依時間倒序排列 (最新的在最上面)
+            docs.sort((a, b) => {
+                const timeA = a.timestamp ? a.timestamp.toMillis() : 0;
+                const timeB = b.timestamp ? b.timestamp.toMillis() : 0;
+                return timeB - timeA;
+            });
+
+            renderAdminTable(docs);
+        }, (error) => {
+            console.error("讀取後台資料失敗: ", error);
+            adminTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">資料讀取失敗</td></tr>`;
+        });
+    }
+
+    function renderAdminTable(data) {
+        if (data.length === 0) {
+            adminTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">目前尚無任何需求單</td></tr>`;
+            return;
+        }
+
+        adminTableBody.innerHTML = data.map(item => {
+            const dateStr = item.timestamp ? new Date(item.timestamp.toMillis()).toLocaleString('zh-TW', {
+                month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'
+            }) : '剛剛';
+
+            return `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${dateStr}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900">
+                        <div class="font-bold text-indigo-600">${item.q1_type}</div>
+                        <div class="text-gray-500 text-xs mt-1">目的: ${item.q2_purpose}</div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-900">
+                        <div>素材: ${item.q3_assets}</div>
+                        <div class="text-gray-500 text-xs mt-1">風格: ${item.q4_style}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            ${item.q7_domain}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-500 max-w-xs">
+                        <div class="truncate" title="${item.q6_content}">內容: ${item.q6_content}</div>
+                        <div class="truncate text-xs mt-1" title="${item.q8_expectation}">期望: ${item.q8_expectation}</div>
+                        ${item.q5_reference !== '無' ? `<div class="truncate text-xs mt-1 text-blue-500" title="${item.q5_reference}">參考: ${item.q5_reference}</div>` : ''}
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+</script>
+
+</body>
+</html>
