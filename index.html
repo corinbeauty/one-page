@@ -234,53 +234,6 @@
     </div>
 </div>
 
-<!-- 後台：管理者檢視區 (預設隱藏) -->
-<div id="admin-view" class="hidden min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm">
-            <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                <i class="fa-solid fa-database text-indigo-600"></i> 後台：客戶需求單列表
-            </h2>
-            <button id="exitAdminBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition text-sm font-medium">
-                <i class="fa-solid fa-sign-out-alt"></i> 離開後台
-            </button>
-        </div>
-
-        <div class="bg-white rounded-xl shadow overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">時間</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">類型 / 目的</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">素材 / 風格</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">網域</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">內容 / 期望</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- 資料會動態注入這裡 -->
-                        <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">載入中...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 管理者登入密碼 Modal -->
-<div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
-    <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform transition-transform scale-95">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">進入後台管理</h3>
-        <p class="text-gray-500 text-sm mb-4">請輸入管理員密碼</p>
-        <input type="password" id="adminPassword" class="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="輸入密碼">
-        <div class="flex gap-3 justify-end">
-            <button id="closeAdminModal" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg">取消</button>
-            <button id="loginAdminBtn" class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg">確認</button>
-        </div>
-    </div>
-</div>
-
 <!-- 提交成功 Modal & LINE 導流 -->
 <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center backdrop-blur-sm">
     <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl text-center relative mx-4">
@@ -305,67 +258,20 @@
     </div>
 </div>
 
-<!-- 右下角隱藏的管理員按鈕 -->
-<button id="openAdminBtn" class="fixed bottom-4 right-4 bg-gray-200 text-gray-500 hover:bg-indigo-100 hover:text-indigo-600 p-3 rounded-full shadow transition opacity-50 hover:opacity-100 z-40" title="管理員登入">
-    <i class="fa-solid fa-lock"></i>
-</button>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-    // 初始化 Firebase
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-survey-app';
-    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-
-    let isAuthReady = false;
-
-    // 進行身分驗證 (Firebase 要求必須驗證才能讀寫)
-    async function setupAuth() {
-        try {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else {
-                await signInAnonymously(auth);
-            }
-            isAuthReady = true;
-            console.log("Firebase Auth OK");
-        } catch (error) {
-            console.error("Auth error:", error);
-        }
-    }
-    setupAuth();
-
+<script>
     // DOM 元素
     const form = document.getElementById('surveyForm');
     const submitBtn = document.getElementById('submitBtn');
     const successModal = document.getElementById('successModal');
     const closeSuccessModal = document.getElementById('closeSuccessModal');
     
-    // Admin 元素
-    const openAdminBtn = document.getElementById('openAdminBtn');
-    const adminModal = document.getElementById('adminModal');
-    const closeAdminModal = document.getElementById('closeAdminModal');
-    const loginAdminBtn = document.getElementById('loginAdminBtn');
-    const adminPasswordInput = document.getElementById('adminPassword');
-    const frontendView = document.getElementById('frontend-view');
-    const adminView = document.getElementById('admin-view');
-    const exitAdminBtn = document.getElementById('exitAdminBtn');
-    const adminTableBody = document.getElementById('admin-table-body');
+    // 填寫您的 Google Apps Script Web App 網址
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxjEPgeZYYHZPyyBdxWIxgWLUX-1oQ_fSV4xc_aJmMghDLhU9_jsT-dL2BU0IkDNTthKg/exec';
 
     // 處理表單送出
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        if (!isAuthReady) {
-            alert("系統正在初始化，請稍後幾秒再按送出。");
-            return;
-        }
-
         // 改變按鈕狀態為載入中
         const originalBtnContent = submitBtn.innerHTML;
         submitBtn.innerHTML = '<div class="loader mr-2"></div> 處理中...';
@@ -379,6 +285,7 @@
             const q1Value = formData.get('q1') === '其他' ? `其他: ${formData.get('q1_other') || '未填寫'}` : formData.get('q1');
             const q2Value = formData.get('q2') === '其他' ? `其他: ${formData.get('q2_other') || '未填寫'}` : formData.get('q2');
 
+            // 組合要傳送到 Google Sheets 的資料格式
             const submissionData = {
                 q1_type: q1Value,
                 q2_purpose: q2Value,
@@ -388,15 +295,18 @@
                 q6_content: formData.get('q6') || '無',
                 q7_domain: formData.get('q7'),
                 q8_expectation: formData.get('q8') || '無',
-                timestamp: serverTimestamp()
+                timestamp: new Date().toLocaleString('zh-TW', { hour12: false }) 
             };
+            
+            // 發送 POST 請求給 Google Apps Script
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // 避免跨域阻擋 (CORS)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submissionData)
+            });
 
-            // 儲存到 Firebase Firestore
-            // 嚴格遵守路徑規範: artifacts/{appId}/public/data/{collectionName}
-            const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'survey_responses');
-            await addDoc(submissionsRef, submissionData);
-
-            // 送出成功，顯示 Modal
+            // 送出成功，顯示引導加 LINE 的 Modal
             successModal.classList.remove('hidden');
             form.reset();
             
@@ -413,106 +323,6 @@
     closeSuccessModal.addEventListener('click', () => {
         successModal.classList.add('hidden');
     });
-
-    // 後台管理邏輯
-    let unsubscribeAdmin = null;
-
-    openAdminBtn.addEventListener('click', () => {
-        adminModal.classList.remove('hidden');
-        adminPasswordInput.value = '';
-        adminPasswordInput.focus();
-    });
-
-    closeAdminModal.addEventListener('click', () => {
-        adminModal.classList.add('hidden');
-    });
-
-    loginAdminBtn.addEventListener('click', () => {
-        if (adminPasswordInput.value === '7310168888') {
-            adminModal.classList.add('hidden');
-            frontendView.classList.add('hidden');
-            adminView.classList.remove('hidden');
-            openAdminBtn.classList.add('hidden');
-            loadAdminData();
-        } else {
-            // 自製錯誤提示，避免用原生 alert
-            const prevClass = adminPasswordInput.className;
-            adminPasswordInput.className += ' border-red-500 ring-2 ring-red-500';
-            setTimeout(() => { adminPasswordInput.className = prevClass; }, 1000);
-            adminPasswordInput.value = '';
-        }
-    });
-
-    exitAdminBtn.addEventListener('click', () => {
-        adminView.classList.add('hidden');
-        frontendView.classList.remove('hidden');
-        openAdminBtn.classList.remove('hidden');
-        if (unsubscribeAdmin) {
-            unsubscribeAdmin(); // 停止監聽資料
-        }
-    });
-
-    // 載入後台資料
-    function loadAdminData() {
-        const submissionsRef = collection(db, 'artifacts', appId, 'public', 'data', 'survey_responses');
-        const q = query(submissionsRef);
-        
-        unsubscribeAdmin = onSnapshot(q, (snapshot) => {
-            const docs = [];
-            snapshot.forEach(doc => {
-                docs.push({ id: doc.id, ...doc.data() });
-            });
-
-            // 依時間倒序排列 (最新的在最上面)
-            docs.sort((a, b) => {
-                const timeA = a.timestamp ? a.timestamp.toMillis() : 0;
-                const timeB = b.timestamp ? b.timestamp.toMillis() : 0;
-                return timeB - timeA;
-            });
-
-            renderAdminTable(docs);
-        }, (error) => {
-            console.error("讀取後台資料失敗: ", error);
-            adminTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">資料讀取失敗</td></tr>`;
-        });
-    }
-
-    function renderAdminTable(data) {
-        if (data.length === 0) {
-            adminTableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">目前尚無任何需求單</td></tr>`;
-            return;
-        }
-
-        adminTableBody.innerHTML = data.map(item => {
-            const dateStr = item.timestamp ? new Date(item.timestamp.toMillis()).toLocaleString('zh-TW', {
-                month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'
-            }) : '剛剛';
-
-            return `
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${dateStr}</td>
-                    <td class="px-6 py-4 text-sm text-gray-900">
-                        <div class="font-bold text-indigo-600">${item.q1_type}</div>
-                        <div class="text-gray-500 text-xs mt-1">目的: ${item.q2_purpose}</div>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-900">
-                        <div>素材: ${item.q3_assets}</div>
-                        <div class="text-gray-500 text-xs mt-1">風格: ${item.q4_style}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            ${item.q7_domain}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-500 max-w-xs">
-                        <div class="truncate" title="${item.q6_content}">內容: ${item.q6_content}</div>
-                        <div class="truncate text-xs mt-1" title="${item.q8_expectation}">期望: ${item.q8_expectation}</div>
-                        ${item.q5_reference !== '無' ? `<div class="truncate text-xs mt-1 text-blue-500" title="${item.q5_reference}">參考: ${item.q5_reference}</div>` : ''}
-                    </td>
-                </tr>
-            `;
-        }).join('');
-    }
 </script>
 
 </body>
