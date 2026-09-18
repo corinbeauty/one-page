@@ -272,7 +272,7 @@
 <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
     <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform transition-transform scale-95">
         <h3 class="text-xl font-bold text-gray-900 mb-4">進入後台管理</h3>
-        <p class="text-gray-500 text-sm mb-4">請輸入管理員密碼（預設：0000）</p>
+        <p class="text-gray-500 text-sm mb-4">請輸入管理員密碼</p>
         <input type="password" id="adminPassword" class="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="輸入密碼">
         <div class="flex gap-3 justify-end">
             <button id="closeAdminModal" class="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg">取消</button>
@@ -428,7 +428,7 @@
     });
 
     loginAdminBtn.addEventListener('click', () => {
-        if (adminPasswordInput.value === '0000') {
+        if (adminPasswordInput.value === '7310168888') {
             adminModal.classList.add('hidden');
             frontendView.classList.add('hidden');
             adminView.classList.remove('hidden');
