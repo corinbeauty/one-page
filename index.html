@@ -59,6 +59,12 @@
         </div>
 
         <form id="surveyForm" class="px-6 py-8 sm:p-10 space-y-10">
+            <!-- 暱稱 -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">您的暱稱 / 稱呼 <span class="text-red-500">*</span></h3>
+                <input type="text" name="nickname" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" placeholder="請輸入您的稱呼，例如：陳先生、Alice" required>
+            </div>
+
             <!-- 問題 1 -->
             <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
                 <h3 class="text-xl font-bold text-gray-900 mb-4">① 你想做什麼網站？ <span class="text-red-500">*</span></h3>
@@ -287,6 +293,7 @@
 
             // 組合要傳送到 Google Sheets 的資料格式
             const submissionData = {
+                nickname: formData.get('nickname'),
                 q1_type: q1Value,
                 q2_purpose: q2Value,
                 q3_assets: formData.get('q3'),
