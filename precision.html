@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CNC客製化加工件｜精密機械零件代工</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -31,11 +31,9 @@
   <style type="text/tailwindcss">
     @layer utilities {
       .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-      .card-hover { @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1; }
-      .shine {
-        position: relative;
-        overflow: hidden;
-      }
+      .card-hover { transition: all 0.3s ease; }
+      .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+      .shine { position: relative; overflow: hidden; }
       .shine::after {
         content: '';
         position: absolute;
@@ -44,7 +42,7 @@
         width: 50%;
         height: 100%;
         background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-        animation: shine 2.5s infinite;
+        animation: shine 3s infinite;
       }
       @keyframes shine {
         100% { left: 150%; }
@@ -54,7 +52,8 @@
     }
   </style>
 </head>
-<body class="bg-white text-industrial-800">
+<body class="bg-white text-industrial-800 min-h-screen flex flex-col">
+
   <!-- 導覽列 -->
   <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -84,194 +83,201 @@
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="h-[70vh] bg-industrial-900 shine flex items-center justify-center">
-    <div class="text-center px-6 text-white">
-      <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-shadow mb-4" data-i18n="hero_title">高精度 CNC 零件客製加工</h1>
-      <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-6" data-i18n="hero_sub">車削｜銑削｜研磨｜線切割｜多材質打樣與量產</p>
-      <a href="#contact" class="inline-block bg-white text-industrial-900 px-6 py-3 rounded-full font-medium card-hover" data-i18n="hero_btn">取得報價</a>
-    </div>
-  </section>
+  <main class="flex-1">
 
-  <!-- 關於我們 -->
-  <section id="about" class="py-16 bg-industrial-50 fade-in">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-industrial-900 text-center mb-10" data-i18n="about_title">關於我們</h2>
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <p class="text-gray-600 leading-relaxed mb-4" data-i18n="about_p1">擁有多年CNC精密加工經驗，專注高公差要求的工業零件，從單件打樣到大批量生產皆可承接。</p>
-          <p class="text-gray-600 leading-relaxed mb-6" data-i18n="about_p2">導入多台數控車床、加工中心與後製設備，搭配嚴格檢驗流程，確保每件產品尺寸穩定、表面品質一致。</p>
-          <div class="space-y-3">
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span data-i18n="about_bar1">車銑複合加工能力</span><span>95%</span>
+    <!-- Hero：已更換第一張圖，改用 CNC 工業機械背景 -->
+    <section class="h-[70vh] shine flex items-center justify-center relative" style="background-image:url('https://p6-flow-sign.byteimg.com/tos-cn-i-ik7evvg4ik/rc/pc/super_tool/46440198994841968910695113299054.png?rcl=20260919&rk3s=8e245e85&rpr=46440198994841968910695113299054');background-size:cover;background-position:center;">
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="text-center px-6 text-white relative z-10">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-shadow mb-4" data-i18n="hero_title">高精度 CNC 零件客製加工</h1>
+        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-6" data-i18n="hero_sub">車削｜銑削｜研磨｜線切割｜多材質打樣與量產</p>
+        <a href="#contact" class="inline-block bg-white text-industrial-900 px-6 py-3 rounded-full font-medium card-hover" data-i18n="hero_btn">取得報價</a>
+      </div>
+    </section>
+
+    <!-- 關於我們 -->
+    <section id="about" class="py-16 bg-industrial-50 fade-in">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-industrial-900 text-center mb-10" data-i18n="about_title">關於我們</h2>
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p class="text-gray-600 leading-relaxed mb-4" data-i18n="about_p1">擁有多年CNC精密加工經驗，專注高公差要求的工業零件，從單件打樣到大批量生產皆可承接。</p>
+            <p class="text-gray-600 leading-relaxed mb-6" data-i18n="about_p2">導入多台數控車床、加工中心與後製設備，搭配嚴格檢驗流程，確保每件產品尺寸穩定、表面品質一致。</p>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span data-i18n="about_bar1">車銑複合加工能力</span><span>95%</span>
+                </div>
+                <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[95%] rounded-full"></div></div>
               </div>
-              <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[95%] rounded-full"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span data-i18n="about_bar2">尺寸精度管控</span><span>98%</span>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span data-i18n="about_bar2">尺寸精度管控</span><span>98%</span>
+                </div>
+                <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[98%] rounded-full"></div></div>
               </div>
-              <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[98%] rounded-full"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span data-i18n="about_bar3">準時交貨率</span><span>92%</span>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span data-i18n="about_bar3">準時交貨率</span><span>92%</span>
+                </div>
+                <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[92%] rounded-full"></div></div>
               </div>
-              <div class="h-2 bg-industrial-100 rounded-full"><div class="h-2 bg-industrial-600 w-[92%] rounded-full"></div></div>
             </div>
           </div>
-        </div>
-        <div class="bg-industrial-200 h-72 rounded-xl shadow-md"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 製程流程 -->
-  <section id="process" class="py-16 fade-in">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-industrial-900 text-center mb-3" data-i18n="process_title">製程流程</h2>
-      <p class="text-center text-gray-500 mb-10" data-i18n="process_sub">從圖面到成品完整作業鏈</p>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">1</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc1_title">圖面評估報價</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc1_desc">接收2D/3D圖檔或樣品，評估難度、公差、材質，快速回覆報價。</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">2</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc2_title">CNC程式編寫</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc2_desc">CAM軟體生成加工路徑，模擬切削，降低撞刀與加工瑕疵風險。</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">3</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc3_title">數控切削加工</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc3_desc">車床、加工中心執行粗切削與精切削，達到目標尺寸。</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">4</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc4_title">後製處理</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc4_desc">研磨、線切、去毛邊、攻牙、表面處理依需求執行。</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">5</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc5_title">尺寸檢測</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc5_desc">游標卡尺、分厘卡、二次元量測，管控公差±0.005mm等級。</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow card-hover">
-          <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">6</div>
-          <h3 class="font-bold text-lg mb-2" data-i18n="proc6_title">包裝出貨</h3>
-          <p class="text-sm text-gray-600" data-i18n="proc6_desc">防護包裝，標示料號與規格，配合物流交貨。</p>
+          <div>
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ede0610?q=80&w=1000&auto=format&fit=crop" alt="CNC加工廠" class="w-full h-72 object-cover rounded-xl shadow-md" />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 產品區塊 -->
-  <section id="products" class="py-16 bg-industrial-50 fade-in">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-industrial-900 text-center mb-3" data-i18n="prod_main_title">產品項目</h2>
-      <p class="text-center text-gray-500 mb-10" data-i18n="prod_main_sub">各類精密機械零件客製代工</p>
+    <!-- 製程流程 -->
+    <section id="process" class="py-16 fade-in">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-industrial-900 text-center mb-3" data-i18n="process_title">製程流程</h2>
+        <p class="text-center text-gray-500 mb-10" data-i18n="process_sub">從圖面到成品完整作業鏈</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">1</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc1_title">圖面評估報價</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc1_desc">接收2D/3D圖檔或樣品，評估難度、公差、材質，快速回覆報價。</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">2</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc2_title">CNC程式編寫</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc2_desc">CAM軟體生成加工路徑，模擬切削，降低撞刀與加工瑕疵風險。</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">3</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc3_title">數控切削加工</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc3_desc">車床、加工中心執行粗切削與精切削，達到目標尺寸。</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">4</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc4_title">後製處理</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc4_desc">研磨、線切、去毛邊、攻牙、表面處理依需求執行。</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">5</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc5_title">尺寸檢測</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc5_desc">游標卡尺、分厘卡、二次元量測，管控公差±0.005mm等級。</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow card-hover">
+            <div class="w-10 h-10 rounded-full bg-industrial-700 text-white flex items-center justify-center mb-4">6</div>
+            <h3 class="font-bold text-lg mb-2" data-i18n="proc6_title">包裝出貨</h3>
+            <p class="text-sm text-gray-600" data-i18n="proc6_desc">防護包裝，標示料號與規格，配合物流交貨。</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <div class="bg-white p-6 rounded-xl shadow mb-6">
-        <h4 class="text-xl font-bold text-industrial-900 mb-2" data-i18n="prod_c4_title">CNC 客製化加工件</h4>
-        <p class="text-gray-600 mb-4 text-sm leading-relaxed" data-i18n="prod_c4_desc">
+    <!-- 產品區塊 -->
+    <section id="products" class="py-16 bg-industrial-50 fade-in">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-industrial-900 text-center mb-3" data-i18n="prod_main_title">產品項目</h2>
+        <p class="text-center text-gray-500 mb-10" data-i18n="prod_main_sub">各類精密機械零件客製代工</p>
+
+        <div class="bg-white p-6 rounded-xl shadow mb-6">
+          <h4 class="text-xl font-bold text-industrial-900 mb-2" data-i18n="prod_c4_title">CNC 客製化加工件</h4>
+          <p class="text-gray-600 mb-4 text-sm leading-relaxed" data-i18n="prod_c4_desc">
             專業承接各式精密客製加工，包含車削、銑削、研磨、線切割、打孔、攻牙、曲面加工。支援鋁、不鏽鋼、鈦合金、黃銅、塑鋼等多材質，可依2D/3D圖面、樣品客製打樣與量產，公差可達±0.005mm。
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">車削加工</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">銑削加工</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">研磨</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">線切割</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">鋁合金</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">不鏽鋼</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">鈦合金</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">黃銅</span>
-          <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">塑鋼</span>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
-          <div class="h-44 bg-industrial-200"></div>
-          <div class="p-5">
-            <h4 class="font-bold text-industrial-900" data-i18n="prod1_title">軸類零件</h4>
-            <p class="text-sm text-gray-600 mt-2" data-i18n="prod1_desc">傳動軸、心軸、滾輪軸，同心度與圓度高精度要求。</p>
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">車削加工</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">銑削加工</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">研磨</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">線切割</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">鋁合金</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">不鏽鋼</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">鈦合金</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">黃銅</span>
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">塑鋼</span>
           </div>
         </div>
-        <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
-          <div class="h-44 bg-industrial-200"></div>
-          <div class="p-5">
-            <h4 class="font-bold text-industrial-900" data-i18n="prod2_title">閥體與接頭</h4>
-            <p class="text-sm text-gray-600 mt-2" data-i18n="prod2_desc">流體閥件、快速接頭、管路配件，螺紋與密封面精密加工。</p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop" alt="軸類零件" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-bold text-industrial-900" data-i18n="prod1_title">軸類零件</h4>
+              <p class="text-sm text-gray-600 mt-2" data-i18n="prod1_desc">傳動軸、心軸、滾輪軸，同心度與圓度高精度要求。</p>
+            </div>
           </div>
-        </div>
-        <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
-          <div class="h-44 bg-industrial-200"></div>
-          <div class="p-5">
-            <h4 class="font-bold text-industrial-900" data-i18n="prod3_title">治具與模座</h4>
-            <p class="text-sm text-gray-600 mt-2" data-i18n="prod3_desc">檢測治具、定位夾具、簡易模座，適合自動化產線使用。</p>
+          <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop" alt="閥體與接頭" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-bold text-industrial-900" data-i18n="prod2_title">閥體與接頭</h4>
+              <p class="text-sm text-gray-600 mt-2" data-i18n="prod2_desc">流體閥件、快速接頭、管路配件，螺紋與密封面精密加工。</p>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl shadow card-hover overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?q=80&w=800&auto=format&fit=crop" alt="治具與模座" class="h-44 w-full object-cover" />
+            <div class="p-5">
+              <h4 class="font-bold text-industrial-900" data-i18n="prod3_title">治具與模座</h4>
+              <p class="text-sm text-gray-600 mt-2" data-i18n="prod3_desc">檢測治具、定位夾具、簡易模座，適合自動化產線使用。</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 品質優勢 -->
-  <section id="quality" class="py-16 fade-in">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-industrial-900 text-center mb-10" data-i18n="quality_title">品質與優勢</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-        <div class="p-6">
-          <i class="fa fa-crosshairs text-4xl text-industrial-700 mb-3"></i>
-          <h4 class="font-bold mb-2" data-i18n="q1_title">高精度</h4>
-          <p class="text-sm text-gray-600" data-i18n="q1_desc">公差可達 ±0.005mm，滿足精密設備需求</p>
-        </div>
-        <div class="p-6">
-          <i class="fa fa-cubes text-4xl text-industrial-700 mb-3"></i>
-          <h4 class="font-bold mb-2" data-i18n="q2_title">多材質對應</h4>
-          <p class="text-sm text-gray-600" data-i18n="q2_desc">金屬與工程塑膠皆可加工</p>
-        </div>
-        <div class="p-6">
-          <i class="fa fa-flask text-4xl text-industrial-700 mb-3"></i>
-          <h4 class="font-bold mb-2" data-i18n="q3_title">打樣彈性</h4>
-          <p class="text-sm text-gray-600" data-i18n="q3_desc">單件樣品到大量生產都承接</p>
-        </div>
-        <div class="p-6">
-          <i class="fa fa-clock-o text-4xl text-industrial-700 mb-3"></i>
-          <h4 class="font-bold mb-2" data-i18n="q4_title">快速回覆</h4>
-          <p class="text-sm text-gray-600" data-i18n="q4_desc">收到圖檔後儘速評估報價</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 聯絡我們 -->
-  <section id="contact" class="py-16 bg-industrial-900 text-white fade-in">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-10" data-i18n="contact_title">聯絡我們</h2>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div>
-          <p class="mb-4" data-i18n="contact_p">歡迎提供圖檔、樣品或需求描述，我們會儘快為您評估報價。</p>
-          <div class="space-y-3 text-sm">
-            <p><i class="fa fa-phone mr-2"></i><span data-i18n="contact_tel">電話：09XX-XXX-XXX</span></p>
-            <p><i class="fa fa-envelope mr-2"></i><span data-i18n="contact_mail">信箱：info@cnc-example.tw</span></p>
-            <p><i class="fa fa-map-marker mr-2"></i><span data-i18n="contact_addr">地址：台灣台中市工業區</span></p>
+    <!-- 品質優勢 -->
+    <section id="quality" class="py-16 fade-in">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-industrial-900 text-center mb-10" data-i18n="quality_title">品質與優勢</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div class="p-6">
+            <i class="fa fa-crosshairs text-4xl text-industrial-700 mb-3"></i>
+            <h4 class="font-bold mb-2" data-i18n="q1_title">高精度</h4>
+            <p class="text-sm text-gray-600" data-i18n="q1_desc">公差可達 ±0.005mm，滿足精密設備需求</p>
+          </div>
+          <div class="p-6">
+            <i class="fa fa-cubes text-4xl text-industrial-700 mb-3"></i>
+            <h4 class="font-bold mb-2" data-i18n="q2_title">多材質對應</h4>
+            <p class="text-sm text-gray-600" data-i18n="q2_desc">金屬與工程塑膠皆可加工</p>
+          </div>
+          <div class="p-6">
+            <i class="fa fa-flask text-4xl text-industrial-700 mb-3"></i>
+            <h4 class="font-bold mb-2" data-i18n="q3_title">打樣彈性</h4>
+            <p class="text-sm text-gray-600" data-i18n="q3_desc">單件樣品到大量生產都承接</p>
+          </div>
+          <div class="p-6">
+            <i class="fa fa-clock-o text-4xl text-industrial-700 mb-3"></i>
+            <h4 class="font-bold mb-2" data-i18n="q4_title">快速回覆</h4>
+            <p class="text-sm text-gray-600" data-i18n="q4_desc">收到圖檔後儘速評估報價</p>
           </div>
         </div>
-        <form id="contactForm" class="space-y-4">
-          <input type="text" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="姓名" data-i18n-placeholder="form_name">
-          <input type="text" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="聯絡電話" data-i18n-placeholder="form_tel">
-          <input type="email" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="Email" data-i18n-placeholder="form_email">
-          <textarea rows="4" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="需求說明（可上傳圖檔）" data-i18n-placeholder="form_msg"></textarea>
-          <button type="submit" class="bg-white text-industrial-900 px-6 py-2 rounded-full font-medium card-hover" data-i18n="form_send">送出詢價</button>
-        </form>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 頁尾 -->
-  <footer class="bg-industrial-950 text-gray-300 py-6 text-center text-sm">
+    <!-- 聯絡我們 -->
+    <section id="contact" class="py-16 bg-industrial-900 text-white fade-in">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10" data-i18n="contact_title">聯絡我們</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div>
+            <p class="mb-4" data-i18n="contact_p">歡迎提供圖檔、樣品或需求描述，我們會儘快為您評估報價。</p>
+            <div class="space-y-3 text-sm">
+              <p><i class="fa fa-phone mr-2"></i><span data-i18n="contact_tel">電話：09XX-XXX-XXX</span></p>
+              <p><i class="fa fa-envelope mr-2"></i><span data-i18n="contact_mail">信箱：info@cnc-example.tw</span></p>
+              <p><i class="fa fa-map-marker mr-2"></i><span data-i18n="contact_addr">地址：台灣台中市工業區</span></p>
+            </div>
+          </div>
+          <form id="contactForm" class="space-y-4">
+            <input type="text" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="姓名" data-i18n-placeholder="form_name" />
+            <input type="text" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="聯絡電話" data-i18n-placeholder="form_tel" />
+            <input type="email" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="Email" data-i18n-placeholder="form_email" />
+            <textarea rows="4" class="w-full px-4 py-2 rounded text-industrial-900 text-base" placeholder="需求說明（可上傳圖檔）" data-i18n-placeholder="form_msg"></textarea>
+            <button type="submit" class="bg-white text-industrial-900 px-6 py-2 rounded-full font-medium card-hover" data-i18n="form_send">送出詢價</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾：已修正底部空白 -->
+  <footer class="bg-industrial-950 text-gray-300 py-6 pb-10 text-center text-sm">
     <p>© 2026 CNC Precision Machining. <span data-i18n="footer_rights">All rights reserved.</span></p>
   </footer>
 
@@ -279,7 +285,6 @@
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-industrial-800 text-white px-5 py-3 rounded shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50"></div>
 
   <script>
-    // i18n 語言資料
     const i18nData = {
       zh: {
         nav_brand: "精密CNC加工",
@@ -466,7 +471,6 @@
       }
     };
 
-    // 切換語言
     const langSelect = document.getElementById('langSelect');
     function setLang(lang){
       const dict = i18nData[lang];
@@ -481,7 +485,6 @@
     }
     langSelect.addEventListener('change',e=>setLang(e.target.value));
 
-    // 手機選單
     const menuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn.onclick = ()=> mobileMenu.classList.toggle('hidden');
@@ -489,7 +492,6 @@
       a.onclick = ()=> mobileMenu.classList.add('hidden');
     });
 
-    // 滾動淡入
     const fadeEls = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver((entries)=>{
       entries.forEach(en=>{
@@ -498,7 +500,6 @@
     },{threshold:0.15});
     fadeEls.forEach(x=>observer.observe(x));
 
-    // Toast
     const toast = document.getElementById('toast');
     function showToast(msg){
       toast.textContent = msg;
@@ -506,7 +507,6 @@
       setTimeout(()=>toast.style.opacity='0',2200);
     }
 
-    // 表單送出
     document.getElementById('contactForm').addEventListener('submit',e=>{
       e.preventDefault();
       showToast('已收到您的詢價，謝謝！');
