@@ -71,6 +71,33 @@
         #mobile-menu.open {
             transform: translateX(0);
         }
+
+        /* 自訂動畫 */
+        .scale-hover {
+            transition: all 0.3s ease;
+        }
+        .scale-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(217,167,173,0.18);
+        }
+        .img-zoom {
+            overflow:hidden;
+        }
+        .img-zoom img {
+            transition: transform 0.4s ease;
+        }
+        .img-zoom:hover img {
+            transform: scale(1.08);
+        }
+        .fade-in {
+            opacity:0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity:1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -89,22 +116,23 @@
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-8 items-center">
                     <a href="#" class="nav-link text-brand-text font-medium hover:text-brand-rose">首頁</a>
-                    <a href="#" class="nav-link text-brand-text font-medium hover:text-brand-rose">關於我們</a>
+                    <a href="#about" class="nav-link text-brand-text font-medium hover:text-brand-rose">關於我們</a>
                     
                     <!-- Dropdown Example -->
                     <div class="relative dropdown group py-6">
-                        <a href="#" class="nav-link text-brand-rose font-bold flex items-center gap-1 cursor-pointer">
+                        <a href="#course" class="nav-link text-brand-rose font-bold flex items-center gap-1 cursor-pointer">
                             實體課程 <i class="fa-solid fa-chevron-down text-xs"></i>
                         </a>
                         <div class="dropdown-menu absolute hidden pt-6 top-full left-0 w-48 bg-white shadow-lg border border-gray-100 rounded-b-md z-10 transition-opacity duration-200">
-                            <a href="#" class="block px-4 py-3 text-sm text-brand-text hover:bg-brand-pink hover:text-brand-dark border-l-2 border-transparent hover:border-brand-rose">美甲創業培訓</a>
+                            <a href="#course" class="block px-4 py-3 text-sm text-brand-text hover:bg-brand-pink hover:text-brand-dark border-l-2 border-transparent hover:border-brand-rose">美甲創業培訓</a>
                             <a href="#" class="block px-4 py-3 text-sm text-brand-text hover:bg-brand-pink hover:text-brand-dark border-l-2 border-transparent hover:border-brand-rose">美睫中式嫁接</a>
                             <a href="#" class="block px-4 py-3 text-sm text-brand-text hover:bg-brand-pink hover:text-brand-dark border-l-2 border-transparent hover:border-brand-rose">紋繡全科班</a>
                         </div>
                     </div>
                     
-                    <a href="#" class="nav-link text-brand-text font-medium hover:text-brand-rose">師資陣容</a>
-                    <a href="#" class="nav-link text-brand-text font-medium hover:text-brand-rose">學員見證</a>
+                    <a href="#teacher" class="nav-link text-brand-text font-medium hover:text-brand-rose">師資陣容</a>
+                    <a href="#works" class="nav-link text-brand-text font-medium hover:text-brand-rose">學員作品</a>
+                    <a href="#faq" class="nav-link text-brand-text font-medium hover:text-brand-rose">常見Q&A</a>
                 </nav>
 
                 <!-- Utility Icons & Mobile Menu Button -->
@@ -134,13 +162,15 @@
         </div>
         <div class="overflow-y-auto py-4">
             <a href="#" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">首頁</a>
-            <a href="#" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">關於我們</a>
+            <a href="#about" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">關於我們</a>
             <div class="px-6 py-3 bg-gray-50 font-medium text-brand-rose border-l-4 border-brand-rose">實體課程</div>
-            <a href="#" class="block px-10 py-2 text-sm text-brand-text hover:text-brand-rose">- 美甲創業培訓</a>
+            <a href="#course" class="block px-10 py-2 text-sm text-brand-text hover:text-brand-rose">- 美甲創業培訓</a>
             <a href="#" class="block px-10 py-2 text-sm text-brand-text hover:text-brand-rose">- 美睫中式嫁接</a>
             <a href="#" class="block px-10 py-2 text-sm text-brand-text hover:text-brand-rose">- 紋繡全科班</a>
-            <a href="#" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">師資陣容</a>
-            <a href="#" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">聯絡我們</a>
+            <a href="#teacher" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">師資陣容</a>
+            <a href="#works" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">學員作品</a>
+            <a href="#faq" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">常見Q&A</a>
+            <a href="#contact" class="block px-6 py-3 text-brand-text hover:bg-brand-pink">聯絡我們</a>
         </div>
     </div>
 
@@ -150,98 +180,332 @@
             <div class="container mx-auto px-4 lg:px-8 py-3 text-sm text-gray-500">
                 <a href="#" class="hover:text-brand-rose">首頁</a>
                 <span class="mx-2">/</span>
-                <a href="#" class="hover:text-brand-rose">實體課程</a>
+                <a href="#course" class="hover:text-brand-rose">實體課程</a>
                 <span class="mx-2">/</span>
-                <a href="#" class="hover:text-brand-rose">美甲課程</a>
+                <a href="#course" class="hover:text-brand-rose">美甲課程</a>
                 <span class="mx-2">/</span>
                 <span class="text-brand-text font-medium">全方位美甲創業培訓班</span>
             </div>
         </div>
 
-        <section class="hero-pattern py-12 lg:py-20 border-b border-brand-rose/20">
+        <!-- Hero 主視覺 -->
+        <section class="hero-pattern py-12 lg:py-20 border-b border-brand-rose/20 relative">
             <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
-                <div class="bg-white/90 backdrop-blur-sm p-8 lg:p-12 rounded-2xl shadow-xl text-center border border-white">
-                    <span class="inline-block py-1 px-3 rounded-full bg-brand-rose/10 text-brand-rose text-sm font-semibold tracking-wide mb-4">最受歡迎課程 🔥</span>
-                    <h1 class="text-3xl lg:text-4xl font-bold text-brand-dark mb-6 leading-tight">
-                        全方位美甲創業培訓班 <br>
-                        <span class="text-brand-rose text-2xl lg:text-3xl mt-2 block">打造專屬你的美甲事業版圖</span>
-                    </h1>
-                    
-                    <div class="text-gray-600 space-y-2 mb-8 text-sm lg:text-base max-w-3xl mx-auto text-left lg:text-center leading-relaxed">
-                        <p>✓ 台北 / 台中 / 台南 實體開課，推薦首選美甲證照班</p>
-                        <p>✓ 完整涵蓋：指甲保養、延甲技術、凝膠彩繪、日韓流行款式設計</p>
-                        <p>✓ 從技術到營運：美甲經營管理、行銷教學、輔導個人工作室開業</p>
-                    </div>
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="bg-white/90 backdrop-blur-sm p-8 lg:p-12 rounded-2xl shadow-xl text-center lg:text-left border border-white">
+                        <span class="inline-block py-1 px-3 rounded-full bg-brand-rose/10 text-brand-rose text-sm font-semibold tracking-wide mb-4">最受歡迎課程 🔥</span>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-brand-dark mb-6 leading-tight">
+                            全方位美甲創業培訓班 <br>
+                            <span class="text-brand-rose text-2xl lg:text-3xl mt-2 block">打造專屬你的美甲事業版圖</span>
+                        </h1>
+                        
+                        <div class="text-gray-600 space-y-2 mb-8 text-sm lg:text-base max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+                            <p>✓ 台北 / 台中 / 台南 實體開課，推薦首選美甲證照班</p>
+                            <p>✓ 完整涵蓋：指甲保養、延甲技術、凝膠彩繪、日韓流行款式設計</p>
+                            <p>✓ 從技術到營運：美甲經營管理、行銷教學、輔導個人工作室開業</p>
+                        </div>
 
-                    <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-brand-rose hover:bg-[#c29096] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                        <i class="fa-brands fa-line mr-2 text-xl"></i> 立即諮詢專人
-                    </a>
+                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-brand-rose hover:bg-[#c29096] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-line mr-2 text-xl"></i> 立即諮詢專人
+                        </a>
+                    </div>
+                    <div class="img-zoom rounded-2xl overflow-hidden shadow-xl hidden lg:block">
+                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=700&auto=format&fit=crop" alt="美甲作品" class="w-full h-[420px] object-cover">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
-                
+        <!-- 關於露絲美學 -->
+        <section id="about" class="py-16 bg-white fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
                 <div class="flex items-center gap-4 mb-10">
                     <div class="h-px bg-gray-300 flex-grow"></div>
-                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">課程詳細說明</h2>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">關於露絲美學</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="img-zoom rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&auto=format&fit=crop" alt="美甲教室環境" class="w-full h-80 object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-4">不止教技術，陪你從0開啟美業之路</h3>
+                        <p class="text-brand-text leading-relaxed mb-4">
+                            Ruth Beauty 露絲美學深耕美業教育多年，堅持「技術紮實、教學透明、不強迫推銷」的理念。我們不是一次性的短期體驗課，而是以培養能夠獨立接單、開店創業的專業美甲師為目標。
+                        </p>
+                        <p class="text-brand-text leading-relaxed mb-6">
+                            三個分校同步開課，軟硬體設備完善，教室採明亮舒適的美學空間。課後提供長期技術諮詢、創業資源分享、學員接單媒合，讓你上完課也不會孤立無援。
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-brand-pink/40 p-4 rounded-xl">
+                                <div class="text-3xl font-bold text-brand-rose">6+</div>
+                                <div class="text-xs mt-1 text-brand-text">美業教學年資</div>
+                            </div>
+                            <div class="bg-brand-pink/40 p-4 rounded-xl">
+                                <div class="text-3xl font-bold text-brand-rose">1200+</div>
+                                <div class="text-xs mt-1 text-brand-text">結業學員</div>
+                            </div>
+                            <div class="bg-brand-pink/40 p-4 rounded-xl">
+                                <div class="text-3xl font-bold text-brand-rose">3</div>
+                                <div class="text-xs mt-1 text-brand-text">實體分校</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 課程核心優勢 -->
+        <section id="course" class="py-16 bg-brand-gray fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">課程核心優勢</h2>
                     <div class="h-px bg-gray-300 flex-grow"></div>
                 </div>
 
-                <div class="prose prose-lg max-w-none text-gray-700 space-y-10">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 scale-hover">
+                        <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-dark">系統式教學，0基礎保證學會</h3>
+                        <p class="text-sm leading-relaxed">採系統化、階段式教學設計，將複雜技術拆解。即使是完全沒有基礎的初學者也不用擔心，易學易懂，輕鬆跨出成為專業美甲師的第一步。</p>
+                    </div>
                     
-                    <!-- Feature Blocks -->
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="bg-brand-gray p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
-                            <h3 class="text-xl font-bold mb-3 text-brand-dark">系統式教學，0基礎保證學會</h3>
-                            <p class="text-sm leading-relaxed">採系統化、階段式教學設計，將複雜技術拆解。即使是完全沒有基礎的初學者也不用擔心，易學易懂，輕鬆跨出成為專業美甲師的第一步。</p>
-                        </div>
-                        
-                        <div class="bg-brand-gray p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-users"></i></div>
-                            <h3 class="text-xl font-bold mb-3 text-brand-dark">精緻小班制，老師親自指導</h3>
-                            <p class="text-sm leading-relaxed">為了確保教學品質，我們堅持小班制教學。資深美甲講師能親自指導每一位學員，及時糾正手法，並針對個人學習狀況提供專屬輔導。</p>
-                        </div>
-
-                        <div class="bg-brand-gray p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-credit-card"></i></div>
-                            <h3 class="text-xl font-bold mb-3 text-brand-dark">多元付款方式，學習無負擔</h3>
-                            <p class="text-sm leading-relaxed">支持現金、刷卡、以及無息分期付款（月付僅需約2,522元起），大幅減低學習初期的資金壓力，讓您能安心投資自己的未來。</p>
-                        </div>
-
-                        <div class="bg-brand-gray p-6 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-ban"></i></div>
-                            <h3 class="text-xl font-bold mb-3 text-brand-dark">純粹教學，絕不強迫推銷</h3>
-                            <p class="text-sm leading-relaxed">承諾課堂上絕對不強迫推銷任何產品。提供完善的上課材料，學員沒有購買壓力，可以將100%的心力專注於技術學習上。</p>
-                        </div>
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 scale-hover">
+                        <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-users"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-dark">精緻小班制，老師親自指導</h3>
+                        <p class="text-sm leading-relaxed">為了確保教學品質，我們堅持小班制教學。資深美甲講師能親自指導每一位學員，及時糾正手法，並針對個人學習狀況提供專屬輔導。</p>
                     </div>
 
-                    <!-- Target Audience -->
-                    <div class="bg-brand-pink/30 p-8 rounded-xl mt-12 border border-brand-rose/20">
-                        <h3 class="text-xl font-bold text-brand-dark mb-4 border-l-4 border-brand-rose pl-3">適合對象</h3>
-                        <ul class="list-none space-y-3">
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
-                                <span>對美甲充滿熱情，想將興趣轉化為職業的您。</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
-                                <span>從未接觸過美甲，希望從零開始扎實學習的初學者。</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
-                                <span>曾學過美甲，但覺得技術不夠扎實，想重新調整手法的進修者。</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
-                                <span>計畫未來成立個人美甲工作室或創業的老闆們。</span>
-                            </li>
-                        </ul>
-                        <p class="mt-4 text-sm text-gray-500 italic">* 無論您的職涯方向為何，我們都會在課程中給予專業的諮詢與輔助。</p>
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 scale-hover">
+                        <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-credit-card"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-dark">多元付款方式，學習無負擔</h3>
+                        <p class="text-sm leading-relaxed">支持現金、刷卡、以及無息分期付款（月付僅需約2,522元起），大幅減低學習初期的資金壓力，讓您能安心投資自己的未來。</p>
                     </div>
 
+                    <div class="bg-white p-6 rounded-xl border border-gray-100 scale-hover">
+                        <div class="text-brand-rose text-3xl mb-4"><i class="fa-solid fa-ban"></i></div>
+                        <h3 class="text-xl font-bold mb-3 text-brand-dark">純粹教學，絕不強迫推銷</h3>
+                        <p class="text-sm leading-relaxed">承諾課堂上絕對不強迫推銷任何產品。提供完善的上課材料，學員沒有購買壓力，可以將100%的心力專注於技術學習上。</p>
+                    </div>
+                </div>
+
+                <!-- 適合對象 -->
+                <div class="bg-brand-pink/30 p-8 rounded-xl mt-12 border border-brand-rose/20">
+                    <h3 class="text-xl font-bold text-brand-dark mb-4 border-l-4 border-brand-rose pl-3">適合對象</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
+                            <span>對美甲充滿熱情，想將興趣轉化為職業的您。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
+                            <span>從未接觸過美甲，希望從零開始扎實學習的初學者。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
+                            <span>曾學過美甲，但覺得技術不夠扎實，想重新調整手法的進修者。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-brand-rose mt-1 mr-3"></i>
+                            <span>計畫未來成立個人美甲工作室或創業的老闆們。</span>
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-500 italic">* 無論您的職涯方向為何，我們都會在課程中給予專業的諮詢與輔助。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 課程大綱 -->
+        <section class="py-16 bg-white fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">課程大綱</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="space-y-6">
+                    <div class="border border-brand-rose/20 rounded-xl overflow-hidden">
+                        <div class="bg-brand-rose/10 px-6 py-4 font-bold text-brand-dark">模組一｜基礎護理 & 指甲病理認識</div>
+                        <div class="p-6 text-sm text-brand-text">
+                            指甲構造認識、常見指甲病變辨識、前置乾式/濕式修手、甘皮處理、甲面拋光、手護保養流程、衛生消毒規範（符合美業衛生標準）
+                        </div>
+                    </div>
+                    <div class="border border-brand-rose/20 rounded-xl overflow-hidden">
+                        <div class="bg-brand-rose/10 px-6 py-4 font-bold text-brand-dark">模組二｜凝膠基礎 & 單色、漸層、暈染</div>
+                        <div class="p-6 text-sm text-brand-text">
+                            凝膠產品認識、照燈原理、甲面附著力技巧、單色均勻上色、法式、漸層、水彩暈染、裸透感款式練習，糾正起翹、縮膠常見問題
+                        </div>
+                    </div>
+                    <div class="border border-brand-rose/20 rounded-xl overflow-hidden">
+                        <div class="bg-brand-rose/10 px-6 py-4 font-bold text-brand-dark">模組三｜延甲技術（紙托/軟管延甲）</div>
+                        <div class="p-6 text-sm text-brand-text">
+                            紙托延甲架構、形狀調整（杏仁、方圓、梯形）、斷甲修復、延甲後塑形、打磨與修型、避免斷裂與起翹的關鍵
+                        </div>
+                    </div>
+                    <div class="border border-brand-rose/20 rounded-xl overflow-hidden">
+                        <div class="bg-brand-rose/10 px-6 py-4 font-bold text-brand-dark">模組四｜彩繪、貼飾、立體造型</div>
+                        <div class="p-6 text-sm text-brand-text">
+                            線條彩繪、花藝、格紋、卡通、轉印、鋼珠/碎鑽/金箔搭配、立體膠雕、日韓當季流行款式實作
+                        </div>
+                    </div>
+                    <div class="border border-brand-rose/20 rounded-xl overflow-hidden">
+                        <div class="bg-brand-rose/10 px-6 py-4 font-bold text-brand-dark">模組五｜創業營運 & 行銷實戰</div>
+                        <div class="p-6 text-sm text-brand-text">
+                            報價設定、套餐規劃、客戶應對、預約系統、IG/FB/短影音作品行銷、工作室開業流程、器材清單、成本估算、法規與保險提醒
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 師資陣容 -->
+        <section id="teacher" class="py-16 bg-brand-gray fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">師資陣容</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl overflow-hidden shadow scale-hover">
+                        <div class="img-zoom">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop" alt="講師 Ruth" class="w-full h-64 object-cover">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-brand-dark">Ruth 主講師</h3>
+                            <div class="text-brand-rose text-sm mb-2">創辦人 / 資深美甲講師</div>
+                            <p class="text-xs text-gray-600">10年美甲沙龍實務經驗，國際證照，擅長日韓暈染與延甲架構，教學風格細膩，專門拆解初學者盲點。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow scale-hover">
+                        <div class="img-zoom">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop" alt="Amber講師" class="w-full h-64 object-cover">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-brand-dark">Amber 講師</h3>
+                            <div class="text-brand-rose text-sm mb-2">彩繪 & 立體造型專業師</div>
+                            <p class="text-xs text-gray-600">專攻精細彩繪、立體雕花，多次美業比賽獲獎，引導學員建立個人風格與作品美感。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl overflow-hidden shadow scale-hover">
+                        <div class="img-zoom">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop" alt="Iris講師" class="w-full h-64 object-cover">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-brand-dark">Iris 講師</h3>
+                            <div class="text-brand-rose text-sm mb-2">美業創業顧問</div>
+                            <p class="text-xs text-gray-600">經營多間個人工作室，擅長訂價、行銷、社群經營，專門輔導學員從0到1開店。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 學員作品展示 -->
+        <section id="works" class="py-16 bg-white fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">學員作品實績</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="img-zoom rounded-lg overflow-hidden shadow">
+                        <img src="https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=400&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="img-zoom rounded-lg overflow-hidden shadow">
+                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="img-zoom rounded-lg overflow-hidden shadow">
+                        <img src="https://images.unsplash.com/photo-1605722551378-d26b98edd743?w=400&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="img-zoom rounded-lg overflow-hidden shadow">
+                        <img src="https://images.unsplash.com/photo-1607779097230-5ec722ed58b8?w=400&auto=format&fit=crop" class="w-full h-48 object-cover">
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">* 所有圖片皆為本課程學員課後練習作品，無外購樣片</p>
+            </div>
+        </section>
+
+        <!-- 報名流程 -->
+        <section class="py-16 bg-brand-pink/20 fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">報名流程</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <div class="w-14 h-14 mx-auto rounded-full bg-brand-rose text-white flex items-center justify-center text-xl font-bold mb-4">1</div>
+                        <h4 class="font-bold mb-2 text-brand-dark">LINE諮詢</h4>
+                        <p class="text-xs text-brand-text">傳訊詢問課程細節、開課時間、分校資訊</p>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 mx-auto rounded-full bg-brand-rose text-white flex items-center justify-center text-xl font-bold mb-4">2</div>
+                        <h4 class="font-bold mb-2 text-brand-dark">預約說明</h4>
+                        <p class="text-xs text-brand-text">可預約現場參觀教室或線上一對一解說</p>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 mx-auto rounded-full bg-brand-rose text-white flex items-center justify-center text-xl font-bold mb-4">3</div>
+                        <h4 class="font-bold mb-2 text-brand-dark">繳費報名</h4>
+                        <p class="text-xs text-brand-text">選擇付款方式，保留班級名額</p>
+                    </div>
+                    <div>
+                        <div class="w-14 h-14 mx-auto rounded-full bg-brand-rose text-white flex items-center justify-center text-xl font-bold mb-4">4</div>
+                        <h4 class="font-bold mb-2 text-brand-dark">開課上課</h4>
+                        <p class="text-xs text-brand-text">收到上課通知，領取教材開始學習</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 常見問答 -->
+        <section id="faq" class="py-16 bg-white fade-in">
+            <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                    <h2 class="text-2xl font-bold text-brand-dark tracking-wide">常見 Q&A</h2>
+                    <div class="h-px bg-gray-300 flex-grow"></div>
+                </div>
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full text-left px-5 py-4 bg-brand-gray font-medium flex justify-between items-center">
+                            完全零基礎也可以報名嗎？
+                            <i class="fa-solid fa-chevron-down text-brand-rose transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 py-4 text-sm text-brand-text">
+                            可以。本課程就是為零基礎設計，從最基礎的手部衛生、工具認識開始教，不用任何美術或美甲底子。
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full text-left px-5 py-4 bg-brand-gray font-medium flex justify-between items-center">
+                            上課材料需要自己另外買嗎？
+                            <i class="fa-solid fa-chevron-down text-brand-rose transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 py-4 text-sm text-brand-text">
+                            課程內含上課練習耗材，上課當天不用自備；後續如果要在家練習或開店，老師會提供清單，但不強制向本店採購。
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full text-left px-5 py-4 bg-brand-gray font-medium flex justify-between items-center">
+                            上完課有證書嗎？可以直接接單嗎？
+                            <i class="fa-solid fa-chevron-down text-brand-rose transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 py-4 text-sm text-brand-text">
+                            課程結業後發放結業證書。技術熟練後大多數學員可以開始接單，我們會教報價、作品集製作與行銷方法，但接單成果因人而異。
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-toggle w-full text-left px-5 py-4 bg-brand-gray font-medium flex justify-between items-center">
+                            可以跨分校上課嗎？
+                            <i class="fa-solid fa-chevron-down text-brand-rose transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 py-4 text-sm text-brand-text">
+                            可以，報名後三個分校都可預約補課，可依據你當週地點彈性調整（需提前預約名額）。
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -330,7 +594,7 @@
     </footer>
 
     <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
-        <a href="#contact" class="w-14 h-14 bg-white text-brand-dark rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl hover:bg-gray-50 hover:text-brand-rose transition-all border border-gray-200" title="常見問題">
+        <a href="#faq" class="w-14 h-14 bg-white text-brand-dark rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-2xl hover:bg-gray-50 hover:text-brand-rose transition-all border border-gray-200" title="常見問題">
             <i class="fa-regular fa-circle-question"></i>
         </a>
         <a href="#contact" class="w-14 h-14 bg-[#00B900] text-white rounded-full shadow-[0_4px_15px_rgba(0,185,0,0.3)] flex items-center justify-center text-3xl hover:bg-[#009900] transition-all transform hover:scale-110" title="LINE 專人諮詢">
@@ -352,12 +616,40 @@
                 mobileMenu.classList.remove('open');
             });
             
-            // Close menu when clicking outside (simple implementation)
+            // Close menu when clicking outside
             document.addEventListener('click', (event) => {
                 if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target) && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
                 }
             });
+
+            // FAQ 收合
+            document.querySelectorAll('.faq-toggle').forEach(btn=>{
+                btn.addEventListener('click',()=>{
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                })
+            })
+
+            // 滾動淡入動畫
+            const observer = new IntersectionObserver((entries)=>{
+                entries.forEach(e=>{
+                    if(e.isIntersecting) e.target.classList.add('visible');
+                })
+            },{threshold:0.15})
+            document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el))
+
+            // 平滑捲動
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{
+                a.addEventListener('click',function(e){
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    if(target) target.scrollIntoView({behavior:'smooth'})
+                })
+            })
         });
     </script>
 </body>
